@@ -1,5 +1,15 @@
 const taskList = document.querySelector("#task-list ul");
 console.log(taskList);
+// save(document.querySelectorAll("#task-list li .name"));
+//
+// function save(tasks) {
+//     localStorage.setItem("task-list", JSON.stringify(tasks));
+// }
+//
+// function getTasks() {
+//     const tasks = localStorage.getItem("task-list");
+//     return tasks ? JSON.parse(tasks) : [];
+// }
 
 taskList.addEventListener("click", (event) => {
     console.log(event);
@@ -13,11 +23,13 @@ taskList.addEventListener("click", (event) => {
 })
 
 const searchTask = document.forms["search-tasks"]
-const tasks= document.querySelectorAll("#task-list li .name")
+const tasks = document.querySelectorAll("#task-list li .name");
+// const tasks= getTasks();
 
 searchTask.addEventListener("keyup", (event) => {
-    let inputText = event.target.value.toLowerCase()
-    tasks.forEach((task) => {
+    let inputText = event.target.value.toLowerCase();
+    console.log(tasks)
+    tasks.forEach(task => {
         let title = task.textContent.toLowerCase();
         let isInclude = title.includes(inputText);
         let parentNode = task.parentNode;
@@ -33,7 +45,7 @@ addTask.addEventListener("submit",  (event) => {
     event.preventDefault()
 
     const inputValue = addTask.querySelector("input").value.toString().trim();
-    if(inputValue && !/\s/.test(inputValue[0])) {
+    if (inputValue && !/\s/.test(inputValue[0])) {
         const liTag = document.createElement("li");
         const span1Tag = document.createElement("span");
         const span2Tag = document.createElement("span");
@@ -55,6 +67,7 @@ addTask.addEventListener("submit",  (event) => {
 
         taskList.appendChild(liTag);
 
+        // save(document.querySelectorAll("#task-list li .name"));
         addTask.reset();
     }
 });
