@@ -1,17 +1,30 @@
-body{
-    box-sizing: border-box;
-    margin: 0;
-    background-image: url("asset/3.png");
-    background-size: cover;
-}
-h1, h2{
-    font-weight: normal;
-}
-.app{
-    margin-right: 10px;
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #444;
+    letter-spacing: 1px;
+    background-color: #f5f5f5;
+    animation: slideIn 45s linear infinite;
 }
 
-#wrapper{
+@keyframes slideIn {
+    0%{
+        background-position: top;
+        background-repeat: repeat;
+        background-size: 3000px;
+    }
+    100%{
+        background-position: -100% 100%;
+        background-size: 2753px;
+
+    }
+}
+
+h1, h2 {
+    font-weight: normal;
+    color: #9361bf;
+}
+
+#wrapper {
     width: 90%;
     max-width: 960px;
     margin: 20px auto;
@@ -21,71 +34,74 @@ h1, h2{
     padding: 0 0 20px;
     overflow: hidden;
     border: 1px solid lightgray;
+    background-color: #fff;
 }
 
-#page-banner{
-    background: #eee ;
+#page-banner {
+    background: #9361bf;
     padding: 10px 0;
-
 }
 
-#page-banner h1, #page-banner p{
+#page-banner h1, #page-banner p {
     width: 100%;
     text-align: center;
     margin: 10px 0;
+    color: #fff;
 }
 
-#page-banner input{
+#page-banner input {
     width: 90%;
     max-width: 300px;
     margin: 20px auto;
     display: block;
     padding: 8px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 25px;
     font-size: 16px;
     color: #444;
 }
 
-#task-list, #add-book, #tabbed-content{
+#task-list, #add-task, #tabbed-content {
     margin: 30px;
 }
 
-#task-list ul, #tabbed-content ul{
+#task-list ul, #tabbed-content ul {
     list-style-type: none;
     padding: 0;
 }
 
-#task-list li{
+#task-list li {
     padding: 20px;
     border-left: 5px solid #ddd;
-    color: white;
     margin: 20px 10px;
+    background-color: #f5f5f5;
+    border-radius: 6px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
 }
 
-#task-list li:hover{
+#task-list li:hover {
     border-color: #9361bf;
 }
 
-.delete{
+.delete {
     float: right;
-    background: #344680;
-    padding: 10px;
-    border-radius: 4px;
+    background: #9361bf;
+    padding: 6px;
+    border-radius: 8px;
     cursor: pointer;
     color: white;
 }
 
-.delete:hover{
+.delete:hover {
     background: #333;
 }
 
-#add-book{
+#add-task {
     width: 400px;
     margin: 0 auto;
 }
 
-#add-book input{
+#add-task input {
     display: block;
     margin: 20px 0;
     padding: 10px;
@@ -97,12 +113,13 @@ h1, h2{
     float: left;
 }
 
-#add-book button{
+#add-task button {
     border: 1px solid #9361bf;
-    background: #374236;
+    background: #9361bf;
     padding: 10px 20px;
     font-size: 16px;
     display: inline-block;
+    /*margin: 0;*/
     border-radius: 0 4px 4px 0;
     cursor: pointer;
     width: 100px;
@@ -111,27 +128,31 @@ h1, h2{
     border-left: 0;
     color: white;
 }
-#search-books{
-    border-radius: 2px;
-    display: flex;
-    justify-content: center;
-}
-#search-books input{
-    display: block;
-    margin: 20px 0;
-    color: white;
-    padding: 15px;
-    background: #444444;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    border-radius: 20px;
-    box-sizing: border-box;
-    width: 300px;
-    float: left;
-}
 
-#add-book:after{
+#add-task:after {
     content: '';
     display: block;
     clear: both;
+}
+
+#tabbed-content li {
+    display: inline-block;
+    padding: 10px 14px;
+    background: #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+}
+
+#tabbed-content.tab {
+    display: none;
+    border: 1px solid #ddd;
+    padding: 0 10px;
+    border-radius: 4px;
+}
+
+#tabbed-content.tab.active {
+    display: block;
 }

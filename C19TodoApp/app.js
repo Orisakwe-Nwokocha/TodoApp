@@ -1,111 +1,59 @@
 const taskList = document.querySelector("#task-list ul");
-
-function getTasksFromStorage() {
-    const storedTasks = localStorage.getItem("taskList");
-    return storedTasks ? JSON.parse(storedTasks) : []; // Return empty array if no tasks
-}
-
-function saveTasksToStorage(tasks) {
-    localStorage.setItem("taskList", JSON.stringify(tasks));
-}
-
-const tasks = getTasksFromStorage();
-
-tasks.forEach((task) => {
-    const liTag = document.createElement("li");
-    const firstSpan = document.createElement("span");
-    const secondSpan = document.createElement("span");
-    const thirdSpan = document.createElement('input');
-
-    firstSpan.className = 'name';
-    secondSpan.classList = 'delete';
-    thirdSpan.type = 'checkbox';
-
-    if (task.completed) {
-        thirdSpan.checked = true;
-    }
-
-    liTag.appendChild(firstSpan);
-    liTag.appendChild(secondSpan);
-    liTag.appendChild(thirdSpan);
-
-    firstSpan.textContent = task.text; // Use task.text from storage
-    secondSpan.textContent = "delete";
-    thirdSpan.textContent = 'check';
-
-    taskList.appendChild(liTag);
-});
+console.log(taskList);
 
 taskList.addEventListener("click", (event) => {
-    let className = event.target.className;
-    if (className === "delete") {
-        let li = event.target.parentElement;
+    console.log(event);
+    let classname = event.target.className;
+    console.log(classname);
+
+    if(Object.is(classname, "delete")){
+        let li= event.target.parentElement;
         taskList.removeChild(li);
-
-        const taskText = li.querySelector(".name").textContent;
-        const updatedTasks = tasks.filter((task) => task.text !== taskText);
-        saveTasksToStorage(updatedTasks);
-    } else if (event.target.type === 'checkbox') {
-        const li = event.target.parentElement;
-        const taskText = li.querySelector(".name").textContent;
-
-        tasks.forEach((task) => {
-            if (task.text === taskText) {
-                task.completed = event.target.checked;
-            }
-        });
-        saveTasksToStorage(tasks);
     }
-});
+})
 
-const searchBook = document.forms["search-books"];
+const searchTask = document.forms["search-tasks"]
+const tasks= document.querySelectorAll("#task-list li .name")
 
-const listOfTask = document.querySelectorAll("#book-list li .name");
-searchBook.addEventListener("keyup", function (event) {
-    let inputText = event.target.value.toLowerCase();
+searchTask.addEventListener("keyup", (event) => {
+    let inputText = event.target.value.toLowerCase()
+    tasks.forEach((task) => {
+        let title = task.textContent.toLowerCase();
+        let isInclude = title.includes(inputText);
+        let parentNode = task.parentNode;
 
-    listOfTask.forEach((book) => {
-        let title = book.textContent.toLocaleLowerCase();
-        let isIncludeInputText = title.includes(inputText);
+        console.log(parentNode);
+        parentNode.style.display = isInclude ? "block" : "none";
+    })
 
-        let parentNode = book.parentNode;
+})
 
-        if (isIncludeInputText) {
-            parentNode.style.display = "block";
-        } else {
-            parentNode.style.display = "none";
-        }
-    });
-});
+const addTask = document.forms["add-task"]
+addTask.addEventListener("submit",  (event) => {
+    event.preventDefault()
 
-const addTask = document.forms["add-book"];
-
-addTask.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const inputValue = addTask.querySelector("input").value.trim();
-    if (inputValue) {
+    const inputValue = addTask.querySelector("input").value.toString().trim();
+    if(inputValue && !/\s/.test(inputValue[0])) {
         const liTag = document.createElement("li");
-        const firstSpan = document.createElement("span");
-        const secondSpan = document.createElement("span");
-        const thirdSpan = document.createElement('input');
+        const span1Tag = document.createElement("span");
+        const span2Tag = document.createElement("span");
+        const inputTag = document.createElement("input");
+        const labelTag = document.createElement("label");
 
-        firstSpan.className = 'name';
-        secondSpan.classList = 'delete';
-        thirdSpan.type = 'checkbox';
+        inputTag.classList.add("checkboxes")
+        inputTag.type = "checkbox";
+        span1Tag.classList.add("name");
+        span2Tag.classList.add("delete");
+        span1Tag.textContent = " " + inputValue;
+        span2Tag.textContent = "delete";
 
-        liTag.appendChild(firstSpan);
-        liTag.appendChild(secondSpan);
-        liTag.appendChild(thirdSpan);
+        labelTag.appendChild(inputTag);
 
-        firstSpan.textContent = inputValue;
-        secondSpan.textContent = "delete";
-        thirdSpan.textContent = 'check';
+        liTag.appendChild(labelTag)
+        liTag.appendChild(span1Tag);
+        liTag.appendChild(span2Tag);
 
         taskList.appendChild(liTag);
-
-        tasks.push({ text: inputValue, completed: false });
-        saveTasksToStorage(tasks);
 
         addTask.reset();
     }
