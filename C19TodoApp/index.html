@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="index.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div>
+            <h2 style="margin-left: 20px; color: aqua">TodoApplication</h2>
+            <form id="search-books">
+                <input type="text" placeholder="Search tasks..." />
+            </form>
+        </div>
+        <div id="task-list">
+            <h2 class="title">Task list</h2>
+            <ul>
+                <li>
+                    <span class="name">Finish the html code</span>
+                    <input type="checkbox">
+                    <span class="delete">delete</span>
+                </li>
+                <li>
+                    <span class="name">Finish writing the css code </span>
+                    <input type="checkbox">
+                    <span class="delete">delete</span>
+                </li>
+                <li>
+                    <span class="name">Finish writing the JavaScript code</span>
+                    <input type="checkbox">
+                    <span class="delete">delete</span>
+                </li>
+                <li>
+                    <span class="name">Push to git</span>
+                    <input type="checkbox">
+                    <span class="delete">delete</span>
+                </li>
+            </ul>
+        </div>
+        <form id="add-book">
+            <input type="text" placeholder="Add task....." />
+            <button>Add</button>
+        </form>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
