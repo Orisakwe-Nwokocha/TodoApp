@@ -34,6 +34,15 @@ function loadTasks() {
 
     const savedTasks = JSON.parse(localStorage.getItem("tasks"));
     if (savedTasks) savedTasks.forEach(task => render(task));
+
+    const checkboxStates = JSON.parse(localStorage.getItem("checkboxStates"));
+    console.log(checkboxStates);
+    if (checkboxStates) {
+        checkboxStates.forEach((state, index) => {
+            const checkbox = document.querySelectorAll(".checkboxes")[index];
+            checkbox.checked = state;
+        });
+    }
 }
 
 
@@ -101,6 +110,12 @@ taskList.addEventListener("click", event => {
         const taskName = li.querySelector(".name").textContent.trim();
         removeTaskFromStorage(taskName);
         li.remove();
+    }
+
+    if (event.target.classList.contains("checkboxes")) {
+        const checkboxStates = Array.from(document.querySelectorAll(".checkboxes"))
+            .map(checkbox => checkbox.checked);
+        localStorage.setItem("checkboxStates", JSON.stringify(checkboxStates));
     }
 });
 
